@@ -453,12 +453,12 @@ class Window(PiPWindow):
             f = lambda _: self.show_view(LyricErrorView(self, "Can't detect a spotify song..."))
             arcade.schedule_once(f, 0)
         else:
-            song_changed = self.current_song.update(current_song)  # sends a request/uses the db and can take a while
+            song_changed = self.current_song.update(current_song)
 
             if song_changed:
                 # TODO: Loading lyrics view
                 print("Song Changed")
-                data = self.current_song.get_lyric_data()
+                data = self.current_song.get_lyric_data()  # sends a request/uses the db and can take a while
                 if data is None:
                     print("No Lyrics")
                     f = lambda _: self.show_view(LyricErrorView(self, "Sorry, can't find the lyrics for this song..."))
