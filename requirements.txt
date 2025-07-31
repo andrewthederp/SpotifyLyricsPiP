@@ -1,0 +1,6 @@
+git+https://github.com/andrewthederp/Andreaws_utility_lib
+pyperclip==1.9.0
+requests==2.32.3
+spotipy==2.25.1
+pylette==4.1.0
+arcade==3.0.2
