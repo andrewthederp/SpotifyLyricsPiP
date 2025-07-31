@@ -2,7 +2,7 @@
   // note: remove the `.template` extension and these commands
   // make a new app at `https://developer.spotify.com/dashboard` and get the client secret/id from there.
   "spotify client secret": "",
-  "spotify client id": ""
+  "spotify client id": "",
   "update seconds": 1,
   "window center pos": [
     0,
