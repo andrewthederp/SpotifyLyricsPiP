@@ -44,6 +44,13 @@ class CustomCommandView(CommandView):
 
 
 @command()
+def exit(ctx: CommandContext):
+    window: Window = ctx.window  # type: ignore
+    window.save_config()
+    ctx.database.close()
+    window.on_close()
+
+@command()
 def set_color(ctx: CommandContext, *, color: ColorConverter):
     rgb = color.rgb
 
@@ -58,14 +65,6 @@ def set_color(ctx: CommandContext, *, color: ColorConverter):
 
     ctx.send("Changed the color to ", end="")
     ctx.send(color.rgba, color=color.rgba)
-
-
-@command()
-def exit(ctx: CommandContext):
-    window: Window = ctx.window  # type: ignore
-    window.save_config()
-    ctx.database.close()
-    window.on_close()
 
 @command()
 def set_font_size(ctx: CommandContext, font_size: int):
@@ -87,3 +86,9 @@ def set_seperation_size(ctx: CommandContext, seperation_size: int):
     view.readjust(*ctx.window.size)
     ctx.send("Changed the seperation size to ", end="")
     ctx.send(seperation_size, weight=pyglet.text.Weight.BOLD, underline=(255, 255, 255, 255))
+
+
+@command()
+def get_song_data(ctx: CommandContext):
+    window: Window = ctx.window  # type: ignore
+    print(window.current_song.data)

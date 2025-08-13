@@ -244,7 +244,18 @@ class Song:
         pattern = r"\[(?P<minutes>\d{2}):(?P<seconds>\d{2}.\d{2})]( )?(?P<text>([^\[\\])*)?"
         for match in re.finditer(pattern, synced_lyrics, re.RegexFlag.MULTILINE):
             start = (int(match["minutes"]) * 60 + float(match["seconds"])) * 1000
-            text = match["text"].strip() or "♪"
+            text = match["text"].strip()
+            if not text:
+                continue
+
+            if lines:
+                last_start = lines[-1]["start"]
+                if start - last_start > 7000:  # more than a 7 second lyrics pause
+                    lines.append({
+                    "start": last_start + 2000,
+                    "text": "♪"
+                })
+
             lines.append({
                 "start": start,
                 "text": text
